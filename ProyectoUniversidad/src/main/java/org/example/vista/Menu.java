@@ -134,9 +134,17 @@ public class Menu {
         profesorDAO.updatePro(profesorModificar);
     }
 
+    public static void borrarProfesor() throws IOException {
+        System.out.println("--------Borrar profesor--------");
+        Profesor profesorBorrar = new Profesor();
+        System.out.print("Número de empleado del profesor a eliminar: ");
+        profesorBorrar.setNumEmpleado(Integer.parseInt(leer.readLine()));
+        profesorDAO.deletePro(profesorBorrar);
+    }
+
     public static void menu() throws IOException {
         int salir = 0;
-        while (salir != 9) { // Cambiado a 9 para salir
+        while (salir != 10) {
             System.out.println("\n--- MENÚ PRINCIPAL ---");
             System.out.println("1. Inscribir nuevo alumno");
             System.out.println("2. Mostrar todos los alumnos");
@@ -145,8 +153,9 @@ public class Menu {
             System.out.println("5. Buscar un alumno");
             System.out.println("6. Registrar nuevo profesor");
             System.out.println("7. Mostrar todos los profesores");
-            System.out.println("8. Modificar un profesor"); // Nueva opción
-            System.out.println("9. Salir");
+            System.out.println("8. Modificar un profesor");
+            System.out.println("9. Borrar un profesor");
+            System.out.println("10. Salir");
             System.out.print("Selecciona una opción: ");
 
             try {
@@ -174,9 +183,12 @@ public class Menu {
                         mostrarProfesores();
                         break;
                     case 8:
-                        modificarProfesor(); 
+                        modificarProfesor();
                         break;
                     case 9:
+                        borrarProfesor();
+                        break;
+                    case 10:
                         System.out.println("Adios");
                         break;
                     default:

@@ -155,4 +155,25 @@ public class ProfesorDAO {
         }
         return actualizado;
     }
+    public boolean deletePro(Profesor profesor){
+        boolean profeEliminado = false;
+        String sql = "DELETE FROM maestros WHERE numEmpleado = ?";
+
+        try(Connection conexion = Conexion.conectar();
+            PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, profesor.getNumEmpleado());
+            int ProEliminado = stm.executeUpdate();
+            if(ProEliminado > 0){
+                profeEliminado = true;
+                System.out.println("Profesor eliminado correctamente");
+            } else {
+                System.out.println("No se encontró este empleado");
+            }
+
+        } catch(SQLException err){
+            System.out.println("Error al eliminar profesor: " + err.getMessage());
+        }
+        return profeEliminado;
+    }
 }
