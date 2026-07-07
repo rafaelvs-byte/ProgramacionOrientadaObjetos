@@ -129,4 +129,30 @@ public class ProfesorDAO {
         }
         return encontrado;
     }
+    public boolean updatePro(Profesor profesor){
+        boolean actualizado = false;
+        String sql = "UPDATE maestros SET nombre = ?, edad = ?, puesto = ?, cedulaProfesional = ? WHERE numEmpleado = ?";
+
+        try(Connection conexion = Conexion.conectar();
+            PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setString(1, profesor.getNombre());
+            stm.setInt(2, profesor.getEdad());
+            stm.setString(3, profesor.getPuesto());
+            stm.setString(4, profesor.getCedulaProfesional());
+            stm.setInt(5, profesor.getNumEmpleado());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0){
+                actualizado = true;
+                System.out.println("Profesor actualizado correctamente");
+            } else {
+                System.out.println("No se encontró ningún profesor con ese número de empleado");
+            }
+
+        } catch(SQLException err){
+            System.out.println("Error al actualizar los datos del profesor: " + err.getMessage());
+        }
+        return actualizado;
+    }
 }

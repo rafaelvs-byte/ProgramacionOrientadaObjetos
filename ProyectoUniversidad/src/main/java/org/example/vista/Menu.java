@@ -16,7 +16,6 @@ public class Menu {
     static ProfesorDAO profesorDAO = new ProfesorDAO();
 
     public static void inscribir() throws IOException {
-        // Creamos una nueva instancia local para este alumno
         Alumno nuevoAlumno = new Alumno();
 
         System.out.print("Numero expediente: ");
@@ -117,9 +116,27 @@ public class Menu {
         }
     }
 
+    public static void modificarProfesor() throws IOException {
+        System.out.println("--- Modificar Profesor ---");
+        Profesor profesorModificar = new Profesor();
+
+        System.out.print("Número de empleado del profesor a modificar: ");
+        profesorModificar.setNumEmpleado(Integer.parseInt(leer.readLine()));
+        System.out.print("Nuevo Nombre: ");
+        profesorModificar.setNombre(leer.readLine());
+        System.out.print("Nueva Edad: ");
+        profesorModificar.setEdad(Integer.parseInt(leer.readLine()));
+        System.out.print("Nuevo Puesto (gerente, docente, director): ");
+        profesorModificar.setPuesto(leer.readLine());
+        System.out.print("Nueva Cédula Profesional: ");
+        profesorModificar.setCedulaProfesional(leer.readLine());
+
+        profesorDAO.updatePro(profesorModificar);
+    }
+
     public static void menu() throws IOException {
         int salir = 0;
-        while (salir != 8) { // Cambiado a 8 para salir
+        while (salir != 9) { // Cambiado a 9 para salir
             System.out.println("\n--- MENÚ PRINCIPAL ---");
             System.out.println("1. Inscribir nuevo alumno");
             System.out.println("2. Mostrar todos los alumnos");
@@ -127,8 +144,9 @@ public class Menu {
             System.out.println("4. Borrar un alumno");
             System.out.println("5. Buscar un alumno");
             System.out.println("6. Registrar nuevo profesor");
-            System.out.println("7. Mostrar todos los profesores"); // Nueva opción
-            System.out.println("8. Salir");
+            System.out.println("7. Mostrar todos los profesores");
+            System.out.println("8. Modificar un profesor"); // Nueva opción
+            System.out.println("9. Salir");
             System.out.print("Selecciona una opción: ");
 
             try {
@@ -153,9 +171,12 @@ public class Menu {
                         registrarProfesor();
                         break;
                     case 7:
-                        mostrarProfesores(); // Llama al nuevo método
+                        mostrarProfesores();
                         break;
                     case 8:
+                        modificarProfesor(); 
+                        break;
+                    case 9:
                         System.out.println("Adios");
                         break;
                     default:
