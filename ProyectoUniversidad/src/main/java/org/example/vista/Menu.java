@@ -142,9 +142,26 @@ public class Menu {
         profesorDAO.deletePro(profesorBorrar);
     }
 
+    public static void buscarProfesor() throws IOException {
+        System.out.println("--------Buscar profesor--------");
+        Profesor profesorBuscar = new Profesor();
+        System.out.print("Número de empleado del profesor a buscar: ");
+        profesorBuscar.setNumEmpleado(Integer.parseInt(leer.readLine()));
+
+        ArrayList<Profesor> resultado = profesorDAO.buscarPro(profesorBuscar);
+        if (!resultado.isEmpty()) {
+            System.out.println("\n[¡Profesor encontrado!]");
+            for (Profesor pr : resultado) {
+                System.out.println(pr);
+            }
+        } else {
+            System.out.println("No se encontró ningún profesor con ese número de empleado.");
+        }
+    }
+
     public static void menu() throws IOException {
         int salir = 0;
-        while (salir != 10) {
+        while (salir != 11) {
             System.out.println("\n--- MENÚ PRINCIPAL ---");
             System.out.println("1. Inscribir nuevo alumno");
             System.out.println("2. Mostrar todos los alumnos");
@@ -155,7 +172,8 @@ public class Menu {
             System.out.println("7. Mostrar todos los profesores");
             System.out.println("8. Modificar un profesor");
             System.out.println("9. Borrar un profesor");
-            System.out.println("10. Salir");
+            System.out.println("10. Buscar un profesor");
+            System.out.println("11. Salir");
             System.out.print("Selecciona una opción: ");
 
             try {
@@ -189,6 +207,9 @@ public class Menu {
                         borrarProfesor();
                         break;
                     case 10:
+                        buscarProfesor();
+                        break;
+                    case 11:
                         System.out.println("Adios");
                         break;
                     default:

@@ -176,4 +176,32 @@ public class ProfesorDAO {
         }
         return profeEliminado;
     }
+    public ArrayList<Profesor> buscarPro(Profesor profesor) {
+        ArrayList<Profesor> profesorBD2 = new ArrayList<Profesor>();
+        String sql = "SELECT * FROM maestros WHERE numEmpleado = ?";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, profesor.getNumEmpleado());
+
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    Profesor profesor2 = new Profesor();
+                    profesor2.setNumEmpleado(rs.getInt("numEmpleado"));
+                    profesor2.setNombre(rs.getString("nombre"));
+                    profesor2.setEdad(rs.getInt("edad"));
+                    profesor2.setPuesto(rs.getString("puesto"));
+                    profesor2.setCedulaProfesional(rs.getString("cedulaProfesional"));
+
+                    profesorBD2.add(profesor2);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al buscar profesor: " + e.getMessage());
+        }
+
+        return profesorBD2;
+    }
 }
