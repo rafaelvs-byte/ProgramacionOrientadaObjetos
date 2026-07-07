@@ -105,9 +105,6 @@ public class Menu {
         profesorDAO.nuevoProfesor(nuevoProfesor);
     }
 
-    // ==========================================
-    // NUEVO MÉTODO PARA MOSTRAR PROFESORES
-    // ==========================================
     public static void mostrarProfesores() {
         ArrayList<Profesor> profesores = profesorDAO.extraerProfesor();
         System.out.println("--------Lista de profesores registrados--------");
