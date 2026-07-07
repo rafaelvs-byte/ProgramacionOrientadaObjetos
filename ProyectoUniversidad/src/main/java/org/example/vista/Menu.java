@@ -105,9 +105,24 @@ public class Menu {
         profesorDAO.nuevoProfesor(nuevoProfesor);
     }
 
+    // ==========================================
+    // NUEVO MÉTODO PARA MOSTRAR PROFESORES
+    // ==========================================
+    public static void mostrarProfesores() {
+        ArrayList<Profesor> profesores = profesorDAO.extraerProfesor();
+        System.out.println("--------Lista de profesores registrados--------");
+        if (profesores.isEmpty()) {
+            System.out.println("No hay profesores registrados.");
+        } else {
+            for (Profesor pr : profesores) {
+                System.out.println(pr);
+            }
+        }
+    }
+
     public static void menu() throws IOException {
         int salir = 0;
-        while (salir != 7) {
+        while (salir != 8) { // Cambiado a 8 para salir
             System.out.println("\n--- MENÚ PRINCIPAL ---");
             System.out.println("1. Inscribir nuevo alumno");
             System.out.println("2. Mostrar todos los alumnos");
@@ -115,7 +130,8 @@ public class Menu {
             System.out.println("4. Borrar un alumno");
             System.out.println("5. Buscar un alumno");
             System.out.println("6. Registrar nuevo profesor");
-            System.out.println("7. Salir");
+            System.out.println("7. Mostrar todos los profesores"); // Nueva opción
+            System.out.println("8. Salir");
             System.out.print("Selecciona una opción: ");
 
             try {
@@ -140,6 +156,9 @@ public class Menu {
                         registrarProfesor();
                         break;
                     case 7:
+                        mostrarProfesores(); // Llama al nuevo método
+                        break;
+                    case 8:
                         System.out.println("Adios");
                         break;
                     default:

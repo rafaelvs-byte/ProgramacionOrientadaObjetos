@@ -35,27 +35,29 @@ public class ProfesorDAO {
         return registrado;
     }
 
-    public ArrayList<Profesor> extraerProfesores() {
-        ArrayList<Profesor> profesoresBD = new ArrayList<>();
+    public ArrayList<Profesor> extraerProfesor(){
+        ArrayList<Profesor> profesorBD = new ArrayList<>();
         String sql = "SELECT * FROM maestros";
 
-        try (Connection conexion = Conexion.conectar();
-             PreparedStatement stm = conexion.prepareStatement(sql);
-             ResultSet rs = stm.executeQuery()) {
+        try(Connection conexion = Conexion.conectar();
+            PreparedStatement stm = conexion.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery()) {
 
-            while (rs.next()) {
+            while(rs.next()) {
                 Profesor profesor = new Profesor();
+                // Sigue el orden exacto de tu base de datos de la imagen
                 profesor.setNumEmpleado(rs.getInt("numEmpleado"));
                 profesor.setNombre(rs.getString("nombre"));
                 profesor.setEdad(rs.getInt("edad"));
                 profesor.setPuesto(rs.getString("puesto"));
                 profesor.setCedulaProfesional(rs.getString("cedulaProfesional"));
-                profesoresBD.add(profesor);
+
+                profesorBD.add(profesor);
             }
-        } catch (SQLException err) {
-            System.out.println("Error al extraer los datos de profesores: " + err.getMessage());
+        } catch(SQLException err){
+            System.out.println("Error al extraer los datos: " + err.getMessage());
         }
-        return profesoresBD;
+        return profesorBD;
     }
 
     public boolean actualizarProfesor(Profesor profesor) {
