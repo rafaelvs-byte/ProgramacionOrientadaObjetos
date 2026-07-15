@@ -2,20 +2,19 @@ package org.example.modelo;
 
 import java.util.Locale;
 
-public class Alumno {
+public class Alumno extends PersonaUT implements Ensenable, Evaluable {
     private int numExpediente;
-    private String nombre;
     private int edad;
     private String carrera;
     private int cuatrimestre;
     private boolean registroCorrecto=false;
 
     private static final String[] CARRERAS_VALIDAS = {"TI","QUI","MEC","MKT"};
-    public Alumno(){}
+    public Alumno(){super();}
 
-    public Alumno(int numExpediente, String nombre, int edad, String carrera, int cuatrimestre) {
+    public Alumno(int numExpediente, String nombre, int edad, String carrera, int cuatrimestre, String curp) {
+        super(nombre,curp);
         setNumExpediente(numExpediente);
-        setNombre(nombre);
         setEdad(edad);
         setCarrera(carrera);
         setCuatrimestre(cuatrimestre);
@@ -29,18 +28,6 @@ public class Alumno {
         this.numExpediente = numExpediente;
     }
 
-    public String getNombre() {
-        return nombre.toUpperCase(Locale.ROOT);
-    }
-
-    public void setNombre(String nombre) {
-        if(nombre.isBlank() || nombre.isEmpty()){
-            System.out.println("Error el nombre es requerido ");
-        }
-        else{
-            this.nombre=nombre;
-        }
-    }
 
     public int getEdad() {
         return edad;
@@ -82,12 +69,27 @@ public class Alumno {
     }
 
     @Override
+    public String mostrarTipoPersona() {return "-------Alumno---------";}
+
+    @Override
+    public String aprender() {
+        return (getNombre() + " está estudiando y aprendiendo.");
+    }
+
+    @Override
+    public String recibirEvaluacion() {
+        return (getNombre() + " está recibiendo un examen para ser evaluado.");
+    }
+
+
+    @Override
     public String toString() {
-        return "numExpediente=" + numExpediente + '\n' +
-                "nombre="       + nombre + '\n' +
+        return  mostrarTipoPersona() + "\n" +
+                "numExpediente=" + numExpediente + '\n' +
                 "edad="         + edad +'\n' +
                 "carrera="      + carrera + '\n' +
                 "cuatrimestre=" + cuatrimestre +'\n'+
+                "curp="         + getCurp() + '\n' +
                 "--------------------------------------";
     }
 
@@ -101,4 +103,5 @@ public class Alumno {
 
         return carreraValida;
     }
+
 }

@@ -2,20 +2,19 @@ package org.example.modelo;
 
 import java.util.Locale;
 
-public class Profesor {
+public class Profesor extends PersonaUT implements Ensenador, Evaluador{
     private int numEmpleado;
-    private String nombre;
     private int edad;
     private String puesto;
     private String cedulaProfesional;
 
     private static final String[] PUESTOS_VALIDOS = {"GERENTE", "DOCENTE", "DIRECTOR"};
 
-    public Profesor() {}
+    public Profesor() {super();}
 
-    public Profesor(int numEmpleado, String nombre, int edad, String puesto, String cedulaProfesional) {
+    public Profesor(int numEmpleado, String nombre, int edad, String puesto, String cedulaProfesional,String curp ) {
+        super(nombre,curp);
         setNumEmpleado(numEmpleado);
-        setNombre(nombre);
         setEdad(edad);
         setPuesto(puesto);
         setCedulaProfesional(cedulaProfesional);
@@ -29,24 +28,12 @@ public class Profesor {
         this.numEmpleado = numEmpleado;
     }
 
-    public String getNombre() {
-        return nombre.toUpperCase(Locale.ROOT);
-    }
-
-    public void setNombre(String nombre) {
-        if (nombre.isBlank() || nombre.isEmpty()) {
-            System.out.println("Error el nombre es requerido ");
-        } else {
-            this.nombre = nombre;
-        }
-    }
-
     public int getEdad() {
         return edad;
     }
 
     public void setEdad(int edad) {
-        if (edad > 18 && edad < 110) { // Ajustado a 18 por ser profesor
+        if (edad > 18 && edad < 110) {
             this.edad = edad;
         } else {
             System.out.println("La edad debe de ser de 18 a 110");
@@ -78,12 +65,25 @@ public class Profesor {
     }
 
     @Override
+    public String mostrarTipoPersona() {return "-------Profesor---------";}
+
+    @Override
+    public String ensenar() {
+        return (getNombre() + " está enseañando a los alumnos.");
+    }
+
+    @Override
+    public String evaluar() {
+        return (getNombre() + " está preparando su evaluacion a los estudiantes");}
+
+    @Override
     public String toString() {
-        return "numEmpleado="       + numEmpleado + '\n' +
-                "nombre="            + nombre + '\n' +
+        return mostrarTipoPersona() + "\n" +
+                "numEmpleado="       + numEmpleado + '\n' +
                 "edad="              + edad + '\n' +
                 "puesto="            + puesto + '\n' +
                 "cedulaProfesional=" + cedulaProfesional + '\n' +
+                "curp="         + getCurp() + '\n' +
                 "--------------------------------------";
     }
 

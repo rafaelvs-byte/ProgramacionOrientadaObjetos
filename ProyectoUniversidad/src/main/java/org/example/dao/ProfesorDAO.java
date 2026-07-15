@@ -13,7 +13,7 @@ public class ProfesorDAO {
 
     public boolean nuevoProfesor(Profesor profesor) {
         boolean registrado = false;
-        String sql = "INSERT INTO maestros (numEmpleado, nombre, edad, puesto, cedulaProfesional) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO maestros (numEmpleado, nombre, edad, puesto, cedulaProfesional, curp) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
@@ -23,6 +23,7 @@ public class ProfesorDAO {
             stm.setInt(3, profesor.getEdad());
             stm.setString(4, profesor.getPuesto());
             stm.setString(5, profesor.getCedulaProfesional());
+            stm.setString(6,profesor.getCurp());
 
             int filas = stm.executeUpdate();
             if (filas > 0) {
@@ -35,7 +36,7 @@ public class ProfesorDAO {
         return registrado;
     }
 
-    public ArrayList<Profesor> extraerProfesor(){
+    public static ArrayList<Profesor> extraerProfesor(){
         ArrayList<Profesor> profesorBD = new ArrayList<>();
         String sql = "SELECT * FROM maestros";
 
@@ -51,6 +52,7 @@ public class ProfesorDAO {
                 profesor.setEdad(rs.getInt("edad"));
                 profesor.setPuesto(rs.getString("puesto"));
                 profesor.setCedulaProfesional(rs.getString("cedulaProfesional"));
+                profesor.setCurp(rs.getString("curp"));
 
                 profesorBD.add(profesor);
             }
@@ -62,7 +64,7 @@ public class ProfesorDAO {
 
     public boolean actualizarProfesor(Profesor profesor) {
         boolean actualizado = false;
-        String sql = "UPDATE maestros SET nombre = ?, edad = ?, puesto = ?, cedulaProfesional = ? WHERE numEmpleado = ?";
+        String sql = "UPDATE maestros SET nombre = ?, edad = ?, puesto = ?, cedulaProfesional = ?, curp = ? WHERE numEmpleado = ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
@@ -71,7 +73,8 @@ public class ProfesorDAO {
             stm.setInt(2, profesor.getEdad());
             stm.setString(3, profesor.getPuesto());
             stm.setString(4, profesor.getCedulaProfesional());
-            stm.setInt(5, profesor.getNumEmpleado());
+            stm.setString(5, profesor.getCurp());
+            stm.setInt(6, profesor.getNumEmpleado());
 
             int registrosAfectados = stm.executeUpdate();
             if (registrosAfectados > 0) {
@@ -121,6 +124,7 @@ public class ProfesorDAO {
                     profesor.setEdad(rs.getInt("edad"));
                     profesor.setPuesto(rs.getString("puesto"));
                     profesor.setCedulaProfesional(rs.getString("cedulaProfesional"));
+                    profesor.setCurp(rs.getString("curp"));
                     encontrado = true;
                 }
             }
@@ -131,7 +135,7 @@ public class ProfesorDAO {
     }
     public boolean updatePro(Profesor profesor){
         boolean actualizado = false;
-        String sql = "UPDATE maestros SET nombre = ?, edad = ?, puesto = ?, cedulaProfesional = ? WHERE numEmpleado = ?";
+        String sql = "UPDATE maestros SET nombre = ?, edad = ?, puesto = ?, cedulaProfesional = ?, curp = ? WHERE numEmpleado = ?";
 
         try(Connection conexion = Conexion.conectar();
             PreparedStatement stm = conexion.prepareStatement(sql)) {
@@ -140,7 +144,8 @@ public class ProfesorDAO {
             stm.setInt(2, profesor.getEdad());
             stm.setString(3, profesor.getPuesto());
             stm.setString(4, profesor.getCedulaProfesional());
-            stm.setInt(5, profesor.getNumEmpleado());
+            stm.setString(5,profesor.getCurp());
+            stm.setInt(6, profesor.getNumEmpleado());
 
             int registrosAfectados = stm.executeUpdate();
             if (registrosAfectados > 0){
@@ -193,6 +198,7 @@ public class ProfesorDAO {
                     profesor2.setEdad(rs.getInt("edad"));
                     profesor2.setPuesto(rs.getString("puesto"));
                     profesor2.setCedulaProfesional(rs.getString("cedulaProfesional"));
+                    profesor2.setCurp(rs.getString("curp"));
 
                     profesorBD2.add(profesor2);
                 }
