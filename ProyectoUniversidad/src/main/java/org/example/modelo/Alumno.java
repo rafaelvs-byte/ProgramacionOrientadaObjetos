@@ -85,10 +85,10 @@ public class Alumno extends PersonaUT implements Ensenable, Evaluable {
     @Override
     public String toString() {
         return  mostrarTipoPersona() + "\n" +
-                "numExpediente=" + numExpediente + '\n' +
-                "edad="         + edad +'\n' +
-                "carrera="      + carrera + '\n' +
-                "cuatrimestre=" + cuatrimestre +'\n'+
+                "numExpediente=" + getNumExpediente() + '\n' +
+                "edad="         + getEdad() +'\n' +
+                "carrera="      + getCarrera() + '\n' +
+                "cuatrimestre=" + getCuatrimestre() +'\n'+
                 "curp="         + getCurp() + '\n' +
                 "--------------------------------------";
     }

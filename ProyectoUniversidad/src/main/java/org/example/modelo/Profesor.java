@@ -79,10 +79,10 @@ public class Profesor extends PersonaUT implements Ensenador, Evaluador{
     @Override
     public String toString() {
         return mostrarTipoPersona() + "\n" +
-                "numEmpleado="       + numEmpleado + '\n' +
-                "edad="              + edad + '\n' +
-                "puesto="            + puesto + '\n' +
-                "cedulaProfesional=" + cedulaProfesional + '\n' +
+                "numEmpleado="       + getNumEmpleado() + '\n' +
+                "edad="              + getEdad() + '\n' +
+                "puesto="            + getPuesto() + '\n' +
+                "cedulaProfesional=" + getCedulaProfesional() + '\n' +
                 "curp="         + getCurp() + '\n' +
                 "--------------------------------------";
     }
